@@ -68,7 +68,7 @@ $(function () { // start ready
             img.element.style.display = displayValue;
             
         });
-    } // end filter functio
+    } // end filter function
 
     if ('oninput' in $search[0]) {
         $search.on('input', filter);
