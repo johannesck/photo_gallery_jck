@@ -1,4 +1,5 @@
 $(function () { // start ready
+
     $(".fancybox")
         .attr('rel', 'gallery')
         .fancybox({
@@ -21,8 +22,24 @@ $(function () { // start ready
                 }
             } // end helpers
         }); // end fancybox
+    
+    $(".various").fancybox({
+        // support for iframe media types; just add the class .various to an a element in the gallery
+        // and adjust the settings below
+        type: "iframe",
+        maxWidth: 800,
+        maxHeight: 600,
+        fitToView: false,
+        width: '70%',
+        height: '70%',
+        autoSize: false,
+        closeClick: false,
+        openEffect: 'none',
+        closeEffect: 'none'
+    });
 
-    var $imgs = $('div.gallery img'); // start search & filter
+
+    var $imgs = $('div.gallery img'); // start livesearch
     var $search = $('#searchbox');
     var cache = [];
 
@@ -34,21 +51,28 @@ $(function () { // start ready
     });
 
     function filter() {
-        var query = this.value.trim().toLowerCase();
+        var searchInput = this.value.trim().toLowerCase();
         cache.forEach(function(img) {
             var index = 0;
 
-            if (query) {
-                index = img.text.indexOf(query);
+            if (searchInput) {
+                index = img.text.indexOf(searchInput);
             }
 
-            img.element.style.display = index === -1 ? 'none' : '';
+            var displayValue;
+            if (index === -1) {
+                displayValue = 'none';
+            } else {
+                displayValue = '';
+            }
+            img.element.style.display = displayValue;
+            
         });
-    }
+    } // end filter function
 
     if ('oninput' in $search[0]) {
         $search.on('input', filter);
     } else {
         $search.on('keyup', filter);
-    } // end search & filter
+    } // end livesearch
 }); // end ready
