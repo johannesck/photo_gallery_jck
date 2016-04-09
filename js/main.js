@@ -7,8 +7,8 @@ $(function () { // start ready
             margin : 10,
             fitToView: true,
             beforeShow: function () {
-                this.width = 1281 * .7;
-                this.height = 800 * .7;
+                this.width = 1281 * 0.7;
+                this.height = 800 * 0.7;
             },
             arrows: true,
             closeBtn: false,
